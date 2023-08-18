@@ -7,6 +7,8 @@ return [
     'email' => 'Email',
     'is_active' => 'Status',
     'password' => 'Password',
-    'slug' => 'Company Url',
+    'company_slug' => 'Company Slug',
+    'product_slug' => 'Product Slug',
+    'category_slug' => 'Category Slug',
     'current_category_id' => 'Current Category',
 ];

@@ -8,6 +8,8 @@ return [
     'email' => 'E-posta',
     'is_active' => 'Durum',
     'password' => 'Şifre',
-    'slug' => 'İşletme Linki',
+    'company_slug' => 'İşletme linki',
+    'product_slug' => 'Ürün Linki',
+    'category_slug' => 'Kategori Linki',
     'current_category_id' => 'Mevcut Kategori',
 ];
