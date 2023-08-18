@@ -20,7 +20,7 @@ class CheckCategorySlugRequest extends FormRequest
     {
         return [
             'current_category_id' => Lang::get('input_name.current_category_id'),
-            'slug' => Lang::get('input_name.slug'),
+            'slug' => Lang::get('input_name.category_slug'),
         ];
     }
 }

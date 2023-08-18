@@ -19,7 +19,7 @@ class CheckProductSlugRequest extends FormRequest
     public function attributes()
     {
         return [
-            'slug' => Lang::get('input_name.slug'),
+            'slug' => Lang::get('input_name.product_slug'),
             'current_product_id' => Lang::get('input_name.id')
         ];
     }

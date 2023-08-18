@@ -17,7 +17,7 @@ class CheckCompanySlugRequest extends FormRequest
     public function attributes()
     {
         return [
-            'slug' => Lang::get('input_name.slug'),
+            'slug' => Lang::get('input_name.company_slug'),
         ];
     }
 }
