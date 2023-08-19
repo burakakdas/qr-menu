@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Company::class)->constrained();
-            $table->string('cover_image');
             $table->string('slug');
             $table->json('translations');
             $table->unsignedSmallInteger('order')->nullable();

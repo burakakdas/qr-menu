@@ -19,7 +19,6 @@ class CategorySeeder extends Seeder
             [
                 'id' => 1,
                 'company_id' => 2,
-                'cover_image' => 'image.png',
                 'slug' => 'kategori-1',
                 'translations' => [
                     'tr' => [
@@ -35,7 +34,6 @@ class CategorySeeder extends Seeder
             [
                 'id' => 2,
                 'company_id' => 2,
-                'cover_image' => 'image.png',
                 'slug' => 'kategori-2',
                 'translations' => [
                     'tr' => [
@@ -51,7 +49,6 @@ class CategorySeeder extends Seeder
             [
                 'id' => 3,
                 'company_id' => 2,
-                'cover_image' => 'image.png',
                 'slug' => 'kategori-3',
                 'translations' => [
                     'tr' => [

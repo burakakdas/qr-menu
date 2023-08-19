@@ -24,7 +24,6 @@ class ProductSeeder extends Seeder
                 'company_id' => 1,
                 'category_id' => 1,
                 'slug' => 'urun-1',
-                'cover_image'  => 'image.png',
                 'translations' => [
                     'tr' => [
                         'name' => 'Ürün 1', 'description' => 'Detaylı ürün açıklaması',
@@ -48,7 +47,6 @@ class ProductSeeder extends Seeder
                 'company_id' => 1,
                 'category_id' => 1,
                 'slug' => 'urun-2',
-                'cover_image'  => 'image.png',
                 'translations' => [
                     'tr' => [
                         'name' => 'Ürün 2', 'description' => 'Detaylı ürün açıklaması',
@@ -71,7 +69,6 @@ class ProductSeeder extends Seeder
                 'company_id' => 1,
                 'category_id' => 1,
                 'slug' => 'urun-3',
-                'cover_image'  => 'image.png',
                 'translations' => [
                     'tr' => [
                         'name' => 'Ürün 3', 'description' => 'Detaylı ürün açıklaması',
@@ -96,7 +93,6 @@ class ProductSeeder extends Seeder
                 'company_id' => 1,
                 'category_id' => 2,
                 'slug' => 'urun-4',
-                'cover_image'  => 'image.png',
                 'translations' => [
                     'tr' => [
                         'name' => 'Ürün 4', 'description' => 'Detaylı ürün açıklaması',
@@ -117,7 +113,6 @@ class ProductSeeder extends Seeder
                 'company_id' => 1,
                 'category_id' => 2,
                 'slug' => 'urun-5',
-                'cover_image'  => 'image.png',
                 'translations' => [
                     'tr' => [
                         'name' => 'Ürün 5', 'description' => 'Detaylı ürün açıklaması',
@@ -140,7 +135,6 @@ class ProductSeeder extends Seeder
                 'company_id' => 1,
                 'category_id' => 2,
                 'slug' => 'urun-6',
-                'cover_image'  => 'image.png',
                 'translations' => [
                     'tr' => [
                         'name' => 'Ürün 6', 'description' => 'Detaylı ürün açıklaması',
@@ -166,7 +160,6 @@ class ProductSeeder extends Seeder
                 'company_id' => 1,
                 'category_id' => 3,
                 'slug' => 'urun-7',
-                'cover_image'  => 'image.png',
                 'translations' => [
                     'tr' => [
                         'name' => 'Ürün 7', 'description' => 'Detaylı ürün açıklaması',
@@ -190,7 +183,6 @@ class ProductSeeder extends Seeder
                 'company_id' => 1,
                 'category_id' => 3,
                 'slug' => 'urun-8',
-                'cover_image'  => 'image.png',
                 'translations' => [
                     'tr' => [
                         'name' => 'Ürün 8', 'description' => 'Detaylı ürün açıklaması',
@@ -213,7 +205,6 @@ class ProductSeeder extends Seeder
                 'company_id' => 1,
                 'category_id' => 3,
                 'slug' => 'urun-9',
-                'cover_image'  => 'image.png',
                 'translations' => [
                     'tr' => [
                         'name' => 'Ürün 9', 'description' => 'Detaylı ürün açıklaması',
@@ -238,7 +229,6 @@ class ProductSeeder extends Seeder
                 'company_id' => 1,
                 'category_id' => 3,
                 'slug' => 'urun-10',
-                'cover_image'  => 'image.png',
                 'translations' => [
                     'tr' => [
                         'name' => 'Ürün 10', 'description' => 'Detaylı ürün açıklaması',

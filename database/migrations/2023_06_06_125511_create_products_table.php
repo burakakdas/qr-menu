@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Company::class)->constrained();
             $table->foreignIdFor(\App\Models\Category::class)->constrained();
             $table->string('slug');
-            $table->string('cover_image');
             $table->json('translations');
             $table->json('links')->nullable();
             $table->unsignedSmallInteger('order')->nullable();
