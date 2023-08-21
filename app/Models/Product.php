@@ -122,7 +122,7 @@ class Product extends BaseModel
     public function coverImage(): MorphOne
     {
         return $this->morphOne(Media::class, 'model')
-         ->where('media_type', '=', MediaType::IMAGE)
-         ->where('is_cover', '=', true);
+            ->where('media_type', '=', MediaType::IMAGE)
+            ->where('is_cover', '=', true);
     }
 }
