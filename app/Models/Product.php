@@ -110,6 +110,7 @@ class Product extends BaseModel
     {
         return $this->belongsTo(Category::class);
     }
+
     public function media(): MorphMany
     {
         return $this->morphMany(Media::class, 'model');

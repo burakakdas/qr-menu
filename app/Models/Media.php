@@ -16,9 +16,9 @@ class Media extends Model
         'source',
         'order'
     ];
+
     public function mediable(): MorphTo
     {
-        return $this->morphTo('model');
+        return $this->morphTo();
     }
-
 }

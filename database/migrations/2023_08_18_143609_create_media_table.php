@@ -14,10 +14,10 @@ class CreateMediaTable extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->id();
             $table->morphs('model');
-            $table->string('media_type');
+            $table->enum('media_type', App\Models\Enums\MediaType::getValues());
             $table->string('source');
             $table->boolean('is_cover')->default(false);
-            $table->string('order')->nullable();
+            $table->unsignedSmallInteger('order')->nullable();
             $table->timestamps();
         });
     }
