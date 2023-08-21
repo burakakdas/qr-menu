@@ -93,7 +93,7 @@ class Company extends BaseModel
         );
     }
 
-    public function coverImage(): MorphOne
+    public function logo(): MorphOne
     {
         return $this->morphOne(Media::class, 'model')
             ->where('logo', '=', MediaType::IMAGE);

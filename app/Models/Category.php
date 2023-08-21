@@ -97,7 +97,7 @@ class Category extends BaseModel
         return  $this->belongsTo(Company::class);
     }
 
-    public function media(): MorphMany
+    public function images(): MorphMany
     {
         return $this->morphMany(Media::class, 'model')
             ->where('media_type', '=', MediaType::IMAGE)

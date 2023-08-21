@@ -13,7 +13,7 @@ enum MediaType: int
     public function getLabel(): string
     {
         return match ($this) {
-            self::IMAGE => 'Fotoğraf',
+            self::IMAGE => 'Resim',
         };
     }
 }

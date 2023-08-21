@@ -112,7 +112,7 @@ class Product extends BaseModel
         return $this->belongsTo(Category::class);
     }
 
-    public function media(): MorphMany
+    public function images(): MorphMany
     {
         return $this->morphMany(Media::class, 'model')
             ->where('media_type', '=', MediaType::IMAGE)
@@ -121,7 +121,7 @@ class Product extends BaseModel
 
     public function coverImage(): MorphOne
     {
-     return $this->morphOne(Media::class, 'model')
+        return $this->morphOne(Media::class, 'model')
          ->where('media_type', '=', MediaType::IMAGE)
          ->where('is_cover', '=', true);
     }
