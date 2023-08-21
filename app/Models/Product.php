@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Casts\ProductTranslationJsonKeyToEnum;
+use App\Models\Enums\MediaType;
 use App\Models\Traits\Scopes\CategoryScope;
 use App\Models\Traits\Scopes\CompanyScope;
 use App\Models\Traits\Scopes\IsActiveScope;
@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -113,6 +114,15 @@ class Product extends BaseModel
 
     public function media(): MorphMany
     {
-        return $this->morphMany(Media::class, 'model');
+        return $this->morphMany(Media::class, 'model')
+            ->where('media_type', '=', MediaType::IMAGE)
+            ->orderBy('order');
+    }
+
+    public function coverImage(): MorphOne
+    {
+     return $this->morphOne(Media::class, 'model')
+         ->where('media_type', '=', MediaType::IMAGE)
+         ->where('is_cover', '=', true);
     }
 }

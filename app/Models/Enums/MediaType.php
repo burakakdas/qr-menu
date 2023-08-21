@@ -8,12 +8,12 @@ enum MediaType: int
 {
     use BaseEnumTrait;
 
-    case Photo = 1;
+    case IMAGE = 1;
 
     public function getLabel(): string
     {
         return match ($this) {
-            self::Photo => 'Fotoğraf',
+            self::IMAGE => 'Fotoğraf',
         };
     }
 }
