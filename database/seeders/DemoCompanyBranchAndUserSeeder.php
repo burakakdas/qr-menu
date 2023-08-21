@@ -23,8 +23,8 @@ class DemoCompanyBranchAndUserSeeder extends Seeder
         DB::table('users')->delete();
 
         $companies = [
-            ['id' => 1, 'name' => 'Firma 1', 'logo' => 'image.png', 'address' => 'Adres 1', 'domain' => 'http://ornekdoamin.com', 'slogan' => 'Slogan', 'slug' => 'firma-1', 'settings' => [], 'phone' => '05555555555', 'is_active' => true],
-            ['id' => 2, 'name' => 'Firma 2', 'logo' => 'image.png', 'address' => 'Adres 2', 'domain' => 'http://ornekdoamin2.com', 'slogan' => 'Slogan2', 'slug' => 'firma-2', 'settings' => [], 'phone' => '05555555555', 'is_active' => true],
+            ['id' => 1, 'name' => 'Firma 1', 'address' => 'Adres 1', 'domain' => 'http://ornekdoamin.com', 'slogan' => 'Slogan', 'slug' => 'firma-1', 'settings' => [], 'phone' => '05555555555', 'is_active' => true],
+            ['id' => 2, 'name' => 'Firma 2', 'address' => 'Adres 2', 'domain' => 'http://ornekdoamin2.com', 'slogan' => 'Slogan2', 'slug' => 'firma-2', 'settings' => [], 'phone' => '05555555555', 'is_active' => true],
         ];
 
         foreach ($companies as $company) {

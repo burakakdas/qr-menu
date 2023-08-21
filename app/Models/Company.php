@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Enums\MediaType;
 use App\Models\Traits\Scopes\IsActiveScope;
 use App\Models\Traits\Scopes\NameScope;
 use App\Models\Traits\Scopes\PhoneScope;
 use App\Models\Traits\TrackUsersWithoutCreatingEvent;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -68,7 +70,6 @@ class Company extends BaseModel
 
     protected $fillable = [
         'name',
-        'logo',
         'address',
         'domain',
         'slogan',
@@ -90,5 +91,11 @@ class Company extends BaseModel
         return Attribute::make(
             set: fn (array $value) => $this->asJson($value),
         );
+    }
+
+    public function logo(): MorphOne
+    {
+        return $this->morphOne(Media::class, 'model')
+            ->where('media_type', '=', MediaType::IMAGE);
     }
 }
