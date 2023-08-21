@@ -10,45 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-/**
- * App\Models\BranchProduct
- *
- * @property int $id
- * @property int $branch_id
- * @property int $product_id
- * @property string $price
- * @property Currency $currency
- * @property bool $is_active
- * @property int $created_by_id
- * @property int|null $updated_by_id
- * @property int|null $deleted_by_id
- * @property int|null $created_at
- * @property int|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\User $createdBy
- * @property-read \App\Models\User|null $deletedBy
- * @property-read \App\Models\User|null $updatedBy
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct isActive(bool $isActive)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct query()
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereBranchId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereCreatedById($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereCurrency($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereDeletedById($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct whereUpdatedById($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|BranchProduct withoutTrashed()
- * @mixin \Eloquent
- */
 class BranchProduct extends BaseModel
 {
     use HasFactory, SoftDeletes, TrackUsers;
