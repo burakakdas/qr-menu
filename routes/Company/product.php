@@ -10,14 +10,14 @@ Route::prefix('products')->group(function () {
     Route::post('/', [ProductController::class, 'store'])
         ->name('company.product.store');
 
-    Route::put('/{ProductId}', [ProductController::class, 'update'])
-        ->where('ProductId', '[0-9]+')
+    Route::put('/{productId}', [ProductController::class, 'update'])
+        ->where('productId', '[0-9]+')
         ->name('company.product.update');
 
     Route::post('/check-slug', [ProductController::class, 'checkSlug'])
         ->name('company.product.checkSlug');
 
-    Route::delete('/{ProductId}', [ProductController::class, 'destroy'])
-        ->where('ProductId', '[0-9]+')
+    Route::delete('/{productId}', [ProductController::class, 'destroy'])
+        ->where('productId', '[0-9]+')
         ->name('company.product.destroy');
 });

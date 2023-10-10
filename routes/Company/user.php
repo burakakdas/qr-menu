@@ -11,14 +11,14 @@ Route::prefix('users')->group(function () {
         ->name('company.user.store');
 
     Route::get('/{userId}', [UserController::class, 'show'])
-        ->name('company.user.show')
-        ->where('userId', '[0-9]+');
+        ->where('userId', '[0-9]+')
+        ->name('company.user.show');
 
     Route::put('/{userId}', [UserController::class, 'update'])
-        ->name('company.user.update')
-        ->where('userId', '[0-9]+');
+        ->where('userId', '[0-9]+')
+        ->name('company.user.update');
 
     Route::delete('/{userId}', [UserController::class, 'destroy'])
-        ->name('company.user.destroy')
-        ->where('userId', '[0-9]+');
+        ->where('userId', '[0-9]+')
+        ->name('company.user.destroy');
 });

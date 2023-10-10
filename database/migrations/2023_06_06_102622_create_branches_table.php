@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('slug');
             $table->unsignedSmallInteger('order')->nullable();
-            $table->boolean('is_central');
+            $table->boolean('is_central')->default(false);
             $table->boolean('is_active')->default(false);
             $table->foreignId('created_by_id')->nullable()->constrained('users');
             $table->foreignId('updated_by_id')->nullable()->constrained('users');

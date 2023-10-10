@@ -43,6 +43,7 @@ class RegisteredUserController extends Controller
                 'name' => 'Merkez',
                 'company_id' => $company->id,
                 'slug' => Str::slug('merkez'),
+                'is_central' => true,
                 'is_active' => true,
             ]);
             abort_if((! $branch instanceof Branch), Response::HTTP_INTERNAL_SERVER_ERROR);

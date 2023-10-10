@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\Branch\StoreBranchRequest;
 use App\Http\Requests\Company\Branch\UpdateBranchRequest;
 use App\Http\Resources\Company\Branch\BranchCollection;
+use App\Http\Resources\Company\Branch\BranchResource;
 use App\Models\Branch;
 use App\Services\BranchService;
 use Illuminate\Http\JsonResponse;
@@ -22,9 +23,6 @@ class BranchController extends Controller
         protected BranchService $branchService,
     ) { }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function list(): BranchCollection
     {
         $filter = (new BranchFilter())
@@ -37,12 +35,10 @@ class BranchController extends Controller
         return new BranchCollection($branch);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreBranchRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
+        $validatedData['company_id'] = Auth::user()->company_id;
 
         $branch = $this->branchService->create($validatedData);
 
@@ -53,25 +49,18 @@ class BranchController extends Controller
         return $this->failedJsonResponse(__('messages.Could Not Save'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(int $branchId): JsonResponse
+    public function show(int $branchId): BranchResource
     {
         $branchFilter = (new BranchFilter())
             ->addId($branchId)
             ->addCompanyId(Auth::user()->company_id)
-            ->setAttributes(['id'])
             ->setFetchType(new Model());
 
         $branch = $this->branchService->getByFilter($branchFilter);
 
-        return $this->successJsonResponse($branch);
+        return new BranchResource($branch);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateBranchRequest $request, int $branchId): JsonResponse
     {
         $requestData = $request->safe()->all();
@@ -83,18 +72,17 @@ class BranchController extends Controller
 
         $branch = $this->branchService->getByFilter($branchFilter);
 
-        $updateBranch = $this->branchService->update($requestData, $branch);
-
-        if ($updateBranch) {
-            return $this->successJsonResponse(clientMessage: Lang::get('messages.info.has_been_updated'));
+        if (! $branch instanceof Branch) {
+            return $this->notFoundJsonResponse($branchId, Lang::get('messages.info.not_found'));
         }
 
-        return $this->failedJsonResponse(clientMessage: Lang::get('messages.errors.unexpected_error'));
+        $updateBranch = $this->branchService->update($requestData, $branch);
+
+        return $updateBranch === true
+            ? $this->successJsonResponse(clientMessage: Lang::get('messages.info.has_been_updated'))
+            : $this->failedJsonResponse(clientMessage: Lang::get('messages.errors.unexpected_error'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $branchId): JsonResponse
     {
         $branchFilter = (new BranchFilter())

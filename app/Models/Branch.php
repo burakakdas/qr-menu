@@ -7,12 +7,11 @@ use App\Models\Traits\Scopes\IsActiveScope;
 use App\Models\Traits\Scopes\NameScope;
 use App\Models\Traits\Scopes\PhoneScope;
 use App\Models\Traits\TrackUsers;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Branch extends BaseModel
 {
-    use HasFactory, SoftDeletes, TrackUsers;
+    use SoftDeletes, TrackUsers;
 
     use NameScope, PhoneScope, CompanyScope, IsActiveScope;
 
@@ -20,16 +19,18 @@ class Branch extends BaseModel
 
     protected $fillable = [
         'name',
+        'company_id',
         'phone',
         'email',
         'address',
-        'company_id',
         'slug',
         'order',
+        'is_central',
         'is_active',
     ];
 
     protected $casts = [
+        'is_central' => 'boolean',
         'is_active' => 'boolean',
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp',

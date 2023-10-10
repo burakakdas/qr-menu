@@ -8,16 +8,11 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class BranchCollection extends ResourceCollection
 {
-    /**
-     * Transform the resource collection into an array.
-     *
-     * @return array<int|string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
             'success' => true,
-            'data' => $this->collection->map(function (Branch $branch, $key) {
+            'data' => $this->collection->map(function ($branch) {
                 return [
                     'id' => $branch->id,
                     'name' => $branch->name,

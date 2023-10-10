@@ -2,10 +2,18 @@
 
 namespace App\Http\Requests\Company\Branch;
 
+use App\Helpers\PhoneHelper;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBranchRequest extends FormRequest
 {
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'phone' => PhoneHelper::reformatPhoneData($this->phone),
+        ]);
+    }
+
     public function rules(): array
     {
         return [
@@ -15,6 +23,7 @@ class StoreBranchRequest extends FormRequest
             'address' => ['bail', 'nullable'],
             'slug' => ['bail', 'required', 'alpha_dash:ascii'], // TODO Kayıt esnasında tekrardan kontrol edilmeli
             'order' => ['bail', 'numeric'],
+            'is_central' => ['bail', 'nullable', 'boolean'],
             'is_active' => ['bail', 'nullable', 'boolean'],
         ];
     }

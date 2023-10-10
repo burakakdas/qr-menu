@@ -4,7 +4,7 @@ use App\Http\Controllers\Company\BranchProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('branches/{branchId}/products')->group(function () {
-    Route::get('/', [BranchProductController::class,'list'])
+    Route::get('/', [BranchProductController::class, 'list'])
         ->where('branchId', '[0-9]+')
         ->name('company.branchProduct.list');
 
@@ -13,6 +13,7 @@ Route::prefix('branches/{branchId}/products')->group(function () {
         ->name('company.branchProduct.store');
 
     Route::get('/{branchProductId}', [BranchProductController::class, 'show'])
+        ->where('branchProductId', '[0-9]+')
         ->name('company.branchProduct.show');
 
     Route::put('/{branchProductId}', [BranchProductController::class, 'update'])

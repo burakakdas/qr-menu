@@ -10,6 +10,10 @@ Route::prefix('categories')->group(function () {
     Route::post('/', [CategoryController::class, 'store'])
         ->name('company.category.store');
 
+    Route::put('/{categoryId}', [CategoryController::class, 'show'])
+        ->where('categoryId', '[0-9]+')
+        ->name('company.category.show');
+
     Route::put('/{categoryId}', [CategoryController::class, 'update'])
         ->where('categoryId', '[0-9]+')
         ->name('company.category.update');
