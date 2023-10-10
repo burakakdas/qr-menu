@@ -11,6 +11,7 @@ use App\Http\Requests\Company\Category\CheckCategorySlugRequest;
 use App\Http\Requests\Company\Category\StoreCategoryRequest;
 use App\Http\Requests\Company\Category\UpdateCategoryRequest;
 use App\Http\Resources\Company\Category\CategoryCollection;
+use App\Http\Resources\Company\Category\CategoryResource;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\JsonResponse;
@@ -35,26 +36,18 @@ class CategoryController extends Controller
         return new CategoryCollection($categories);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreCategoryRequest $request): JsonResponse
     {
         $validatedData = $request->getPreparedData();
 
         $category = $this->categoryService->create($validatedData);
 
-        if ($category instanceof Category) {
-            return $this->successJsonResponse(__('messages.category.created'));
-        }
-
-        return $this->failedJsonResponse(__('messages.category.create_failed'));
+        return $category instanceof Category
+            ? $this->successJsonResponse(__('messages.Saved'))
+            : $this->failedJsonResponse(__('messages.Could Not Save'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(int $categoryId): JsonResponse
+    public function show(int $categoryId): CategoryResource | JsonResponse
     {
         $categoryfilter = (new CategoryFilter())
             ->addId($categoryId)
@@ -63,14 +56,12 @@ class CategoryController extends Controller
 
         $category = $this->categoryService->getByFilter($categoryfilter);
 
-        return $this->successJsonResponse($category);
+        return $category instanceof Category
+            ? new CategoryResource($category)
+            : $this->notFoundJsonResponse($categoryId, Lang::get('messages.info.not_found'));
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCategoryRequest $request, int $categoryId)
+    public function update(UpdateCategoryRequest $request, int $categoryId): JsonResponse
     {
         $requestData = $request->safe()->all();
 
@@ -81,18 +72,17 @@ class CategoryController extends Controller
 
         $category = $this->categoryService->getByFilter($categoryFilter);
 
-        $updateCategory = $this->categoryService->update($requestData, $category);
-
-        if($updateCategory) {
-            return $this->successJsonResponse(__('messages.info.has_been_updated'));
+        if (! $category instanceof Category) {
+            $this->notFoundJsonResponse($categoryId, Lang::get('messages.info.not_found'));
         }
 
-        return $this->failedJsonResponse(__('messages.errors.unexpected_error'));
+        $updateCategory = $this->categoryService->update($requestData, $category);
+
+        return $updateCategory === true
+            ? $this->successJsonResponse(__('messages.info.has_been_updated'))
+            : $this->failedJsonResponse(__('messages.errors.unexpected_error'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $categoryId): JsonResponse
     {
         $categoryFilter = (new CategoryFilter())
@@ -119,10 +109,8 @@ class CategoryController extends Controller
 
         $category = $this->categoryService->getByFilter($filter);
 
-        if (! $category instanceof Category) {
-            return $this->successJsonResponse();
-        }
-
-        return $this->failedJsonResponse(clientMessage: Lang::get('messages.This category link has already been taken by another category'));
+        return ! $category instanceof Category
+            ? $this->successJsonResponse()
+            : $this->failedJsonResponse(clientMessage: Lang::get('messages.This category link has already been taken by another category'));
     }
 }

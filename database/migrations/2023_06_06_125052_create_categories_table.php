@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreignId('deleted_by_id')->nullable()->constrained('users');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['company_id', 'slug']);
         });
     }
 

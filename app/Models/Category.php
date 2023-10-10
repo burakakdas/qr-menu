@@ -18,19 +18,16 @@ class Category extends BaseModel
 {
     use HasFactory, SoftDeletes, TrackUsers;
 
-    use NameScope, IsActiveScope, CompanyScope;
+    use NameScope, IsActiveScope;
 
     protected $table = 'categories';
 
     protected $fillable = [
         'company_id',
-        'name',
-        'cover_image',
-        'description',
-        'is_active',
         'slug',
+        'translations',
         'order',
-        'created_by_id',
+        'is_active',
     ];
 
     protected $casts = [

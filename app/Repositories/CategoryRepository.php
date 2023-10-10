@@ -32,7 +32,7 @@ class CategoryRepository extends BaseRepository
         }
 
         if (! empty($filter->getCompanyIds())) {
-            $query = $query->company($filter->getCompanyIds());
+            $query = $query->whereIn('company_id', $filter->getCompanyIds());
         }
 
         return $this->fetchByFilter($filter, $query);

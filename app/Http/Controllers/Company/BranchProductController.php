@@ -42,11 +42,9 @@ class BranchProductController extends Controller
 
         $branchProduct = $this->branchProductService->create($validatedData);
 
-        if ($branchProduct instanceof BranchProduct) {
-            return $this->successJsonResponse(clientMessage: __('messages.Saved'));
-        }
-
-        return $this->failedJsonResponse(clientMessage: __('messages.Could Not Save'));
+        return $branchProduct instanceof BranchProduct
+            ? $this->successJsonResponse(clientMessage: __('messages.Saved'))
+            : $this->failedJsonResponse(clientMessage: __('messages.Could Not Save'));
     }
 
     public function show(int $branchId, int $branchProductId): BranchProductResource | JsonResponse

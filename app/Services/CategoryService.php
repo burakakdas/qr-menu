@@ -36,6 +36,7 @@ class CategoryService extends BaseService
     public function create(array $validatedData): ?Category
     {
         try {
+            // TODO Cover image eklenmeli
             $category = $this->categoryRepository->create($validatedData);
 
             if (! $category instanceof Category) {

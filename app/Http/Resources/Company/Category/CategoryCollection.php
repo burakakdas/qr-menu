@@ -2,22 +2,16 @@
 
 namespace App\Http\Resources\Company\Category;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CategoryCollection extends ResourceCollection
 {
-    /**
-     * Transform the resource collection into an array.
-     *
-     * @return array<int|string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
             'success' => true,
-            'data' => $this->collection->map(function (Category $category, $key) {
+            'data' => $this->collection->map(function ($category) {
                 return [
                     'id' => $category->id,
                     'translations' => $category->translations,
