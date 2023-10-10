@@ -10,7 +10,7 @@ return [
     * Route where request docs will be served from laravel app.
     * localhost:8080/request-docs
     */
-    'url' => 'request-docs',
+    'url' => 'api/request-docs',
     'middlewares' => [
         // \Rakutentech\LaravelRequestDocs\NotFoundWhenProduction::class,
     ],
@@ -54,6 +54,8 @@ return [
     // open api config
     // used to generate open api json
     'open_api' => [
+        'title' => 'Laravel Request Docs',
+        'description' => 'Laravel Request Docs',
         // default version that this library provides
         'version' => '3.0.0',
         // changeable
@@ -62,7 +64,11 @@ return [
         'license' => 'Apache 2.0',
         'license_url' => 'https://www.apache.org/licenses/LICENSE-2.0.html',
         'server_url' => env('APP_URL', 'http://localhost'),
-
+        //openapi 3.0.x doesn't support request body for delete operation
+        //ref: https://github.com/OAI/OpenAPI-Specification/pull/2117
+        'delete_with_body' => false,
+        //exclude http methods that will be excluded from openapi export
+        'exclude_http_methods' => [],
         // for now putting default responses for all. This can be changed later based on specific needs
         'responses' => [
             '200' => [
@@ -147,4 +153,8 @@ return [
             ],
         ],
     ],
+
+    //export request docs as json file from terminal
+    //from project root directory
+    'export_path' => 'api.json'
 ];
