@@ -9,7 +9,6 @@ use App\Models\Traits\Scopes\IsActiveScope;
 use App\Models\Traits\Scopes\NameScope;
 use App\Models\Traits\TrackUsers;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -17,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends BaseModel
 {
-    use HasFactory, SoftDeletes, TrackUsers;
+    use SoftDeletes, TrackUsers;
 
     use IsActiveScope, CategoryScope, NameScope, CompanyScope;
 

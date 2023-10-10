@@ -13,6 +13,7 @@ Route::prefix('branches/{branchId}/products')->group(function () {
         ->name('company.branchProduct.store');
 
     Route::get('/{branchProductId}', [BranchProductController::class, 'show'])
+        ->where('branchId', '[0-9]+')
         ->where('branchProductId', '[0-9]+')
         ->name('company.branchProduct.show');
 

@@ -15,7 +15,7 @@ Route::group(['prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalizati
         Route::get('/menu/{companySlug}', [MenuController::class, 'categories'])
             ->name('menu.categories');
 
-        Route::get('/menu/{companySlug}/{categorySlug}',[MenuController::class, 'categoryProducts'])
+        Route::get('/menu/{companySlug}/{categorySlug}', [MenuController::class, 'categoryProducts'])
             ->name('menu.categoryProducts');
 
         Route::middleware(['auth:sanctum'])->group(function () {

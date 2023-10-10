@@ -8,11 +8,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class BranchProductResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
@@ -20,9 +15,20 @@ class BranchProductResource extends JsonResource
             'data' => [
                 'id' => $this->id,
                 'product' => $this->when($this->relationLoaded('product'), function () {
-                    return new ProductResource($this->product);
+                    return [
+                        'id' => $this->product->id,
+                        'category' => [
+                            'id' => $this->product->category_id,
+                            'translations' => $this->product->category->translations,
+                        ],
+                        'slug' => $this->product->slug,
+                        'cover_image' => $this->product->cover_image,
+                        'translations' => $this->product->translations,
+                        'links' => $this->product->links,
+                        'order' => $this->product->order,
+                        'is_active' => $this->product->is_active,
+                    ];
                 }),
-
                 'price' => $this->price,
                 'currency' => [
                     'id' => $this->currency->value,

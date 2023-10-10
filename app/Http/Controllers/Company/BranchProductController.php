@@ -15,6 +15,8 @@ use App\Models\BranchProduct;
 use App\Services\BranchProductService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 
 class BranchProductController extends Controller
 {
@@ -27,7 +29,7 @@ class BranchProductController extends Controller
         $filter = (new BranchProductFilter())
             ->addBranchId($branchId)
             ->setOrderBy(new OrderBy('id', 'DESC'))
-            ->setFetchType(new Paginate(route('company.branchProduct.list')));
+            ->setFetchType(new Paginate(route('company.branchProduct.list', ['branchId' => $branchId])));
 
         $branchProduct = $this->branchProductService->getByFilter($filter);
 
@@ -47,17 +49,17 @@ class BranchProductController extends Controller
         return $this->failedJsonResponse(clientMessage: __('messages.Could Not Save'));
     }
 
-    public function show(int $branchId, int $branchProductId)
+    public function show(int $branchId, int $branchProductId): BranchProductResource | JsonResponse
     {
-        // TODO Company Id sorgulaması eklenmesi günvenlik için daha uygun
         $filter = (new BranchProductFilter())
             ->addId($branchProductId)
             ->addBranchId($branchId)
-            ->setOnlyCentralBranch(true)
+            ->addCompanyId(Auth::user()->company_id)
             ->setWith([
                 'product' => function(BelongsTo $builder) {
                     $builder->isActive(true);
-                }
+                },
+                'product.category:id,translations',
             ])
             ->setFetchType(new Model());
 
@@ -67,34 +69,34 @@ class BranchProductController extends Controller
             return new BranchProductResource($branchProduct);
         }
 
-        return $this->notFoundJsonResponse($branchProductId);
+        return $this->notFoundJsonResponse($branchProductId, Lang::get('messages.info.not_found'));
     }
 
-    public function update(UpdateBranchProductRequest $request, int $branchId, int $branchProductId)
+    public function update(UpdateBranchProductRequest $request, int $branchId, int $branchProductId): JsonResponse
     {
         $requestData = $request->safe()->all();
 
         $branchFilter = (new BranchProductFilter())
             ->addId($branchProductId)
-            ->addBranchId($branchId) // // TODO CompanyId ile doğru kaydın güncellendiğini kontrol etmek daha güvenli
+            ->addBranchId($branchId)
+            ->addCompanyId(Auth::user()->company_id)
             ->setFetchType(new Model());
 
         $branchProduct = $this->branchProductService->getByFilter($branchFilter);
 
         $updateBranchProduct = $this->branchProductService->update($branchProduct, $requestData);
 
-        if ($updateBranchProduct) {
-            return $this->successJsonResponse(__('messages.info.has_been_updated'));
-        }
-
-        return $this->failedJsonResponse(__('messages.errors.unexpected_error'));
+        return $updateBranchProduct === true
+            ? $this->successJsonResponse(__('messages.info.has_been_updated'))
+            : $this->failedJsonResponse(__('messages.errors.unexpected_error'));
     }
 
-    public function destroy(int $branchProductId,int $branchId): JsonResponse
+    public function destroy(int $branchId, int $branchProductId): JsonResponse
     {
         $branchProductFilter = (new BranchProductFilter())
             ->addId($branchProductId)
             ->addBranchId($branchId)
+            ->addCompanyId(Auth::user()->company_id)
             ->setAttributes(['id'])
             ->setFetchType(new Model());
 
